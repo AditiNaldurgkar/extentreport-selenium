@@ -21,13 +21,13 @@ pipeline {
 
         stage('Report') {
             steps {
-                publishHTML([
-                    reportDir: 'reports',
-                    reportFiles: 'index.html',
-                    reportName: 'Extent Report',
+                publishHTML(target: [
+                    reportDir: 'target',
+                    reportFiles: 'ExtentReport.html',
+                    reportName: 'Test Report',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: true
+                    allowMissing: false
                 ])
             }
         }

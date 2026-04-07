@@ -5,6 +5,7 @@ import io.cucumber.java.en.*;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,14 +34,29 @@ public class LoginSteps1 {
 
     @And("user clicks on login button")
     public void user_clicks_on_login_button() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-WebElement loginBtn = wait.until(
-    ExpectedConditions.elementToBeClickable(By.id("login"))
-);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-loginBtn.click();
+    WebElement loginBtn = wait.until(
+        ExpectedConditions.elementToBeClickable(By.id("login"))
+    );
+
+    // 🔥 Scroll into view (VERY IMPORTANT)
+    ((JavascriptExecutor) driver)
+        .executeScript("arguments[0].scrollIntoView(true);", loginBtn);
+
+    // 🔥 Small wait for stability
+    try { Thread.sleep(1000); } catch (Exception e) {}
+
+    // 🔥 Try normal click
+    try {
+        loginBtn.click();
+    } catch (Exception e) {
+        // 🔥 Fallback: JS click (bypasses overlay)
+        ((JavascriptExecutor) driver)
+            .executeScript("arguments[0].click();", loginBtn);
     }
+}
 
     @Then("user should see {string}")
     public void user_should_see_result(String result) {

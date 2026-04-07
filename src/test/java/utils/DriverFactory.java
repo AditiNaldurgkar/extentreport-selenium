@@ -18,6 +18,7 @@ public class DriverFactory {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+             options.addArguments("--window-size=1920,1080"); 
 
             // ✅ USE THIS (your working Grid URL)
             String gridUrl = "http://172.31.8.161:4444";
