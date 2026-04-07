@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'jdk21'   // 👈 THIS IS MISSING
+    }
+
     stages {
 
         stage('Build') {
@@ -17,14 +21,14 @@ pipeline {
 
         stage('Report') {
             steps {
-              publishHTML([
-    reportDir: 'reports',
-    reportFiles: 'index.html',
-    reportName: 'Extent Report',
-    keepAll: true,
-    alwaysLinkToLastBuild: true,
-    allowMissing: true
-])
+                publishHTML([
+                    reportDir: 'reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Extent Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: true
+                ])
             }
         }
     }
