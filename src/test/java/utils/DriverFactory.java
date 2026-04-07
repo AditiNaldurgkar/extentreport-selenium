@@ -14,8 +14,16 @@ public class DriverFactory {
         try {
             ChromeOptions options = new ChromeOptions();
 
+            // 🔥 Required for Jenkins
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+
+            // ✅ USE THIS (your working Grid URL)
+            String gridUrl = "http://172.31.8.161:4444";
+
             driver.set(new RemoteWebDriver(
-                    new URL("http://172.21.0.177:4444"), // 🔥 replace with your HUB IP
+                    new URL(gridUrl),
                     options
             ));
 
@@ -32,7 +40,7 @@ public class DriverFactory {
     public static void quitDriver() {
         if (getDriver() != null) {
             getDriver().quit();
-            driver.remove(); 
+            driver.remove();
         }
     }
 }
