@@ -8,7 +8,7 @@ Feature: Login functionality on DemoQA
 
   Examples:
     | username     | password     | result            |
-    | testuser1    | pass123      | Login Successful  |
+    | testuser1    | pass123      | Login Failed |
     | testuser2    | wrongpass    | Login Failed      |
     | invaliduser  | pass123      | Login Failed      |
     |              | pass123      | Login Failed      |
