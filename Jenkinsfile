@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/AditiNaldurgkar/extentreport-selenium.git'
-            }
-        }
 
         stage('Build') {
             steps {
