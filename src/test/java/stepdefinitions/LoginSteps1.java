@@ -3,6 +3,9 @@ package stepdefinitions;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import utils.DriverFactory;
 
@@ -27,7 +30,13 @@ public class LoginSteps1 {
 
     @And("user clicks on login button")
     public void user_clicks_on_login_button() {
-        driver.findElement(By.id("login")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+WebElement loginBtn = wait.until(
+    ExpectedConditions.elementToBeClickable(By.id("login"))
+);
+
+loginBtn.click();
     }
 
     @Then("user should see {string}")
